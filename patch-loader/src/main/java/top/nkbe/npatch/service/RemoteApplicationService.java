@@ -500,6 +500,7 @@ public class RemoteApplicationService implements IFrameworkService {
     private static synchronized Looper bindCallbackLooper() {
         if (bindCallbackLooper == null) {
             HandlerThread thread = new HandlerThread("NPatch-ManagerBindCb");
+            thread.setDaemon(true);
             thread.start();
             bindCallbackLooper = thread.getLooper();
         }

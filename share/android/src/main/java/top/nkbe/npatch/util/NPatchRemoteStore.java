@@ -72,8 +72,9 @@ public final class NPatchRemoteStore {
         Context appContext = context.getApplicationContext();
         this.context = appContext == null ? context : appContext;
         this.modulePackageName = requireModulePackage(modulePackageName);
+        String dataDir = this.context.getApplicationInfo().dataDir;
         this.dbHelper = HELPERS.computeIfAbsent(
-                this.context.getApplicationInfo().dataDir, ignored -> new DatabaseHelper(this.context));
+                dataDir == null ? "" : dataDir, ignored -> new DatabaseHelper(this.context));
     }
 
     public static NPatchRemoteStore get(Context context, String modulePackageName) {
